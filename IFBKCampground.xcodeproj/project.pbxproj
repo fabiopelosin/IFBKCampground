@@ -29,6 +29,7 @@
 		E57505A3183D0150008B2168 /* IFBKRoomUsersTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = E575059C183D0150008B2168 /* IFBKRoomUsersTracker.m */; };
 		E57505A4183D0150008B2168 /* IFBKStringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E575059E183D0150008B2168 /* IFBKStringFormatter.m */; };
 		E57505A6183D1665008B2168 /* IFBKAccountsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E57505A5183D1665008B2168 /* IFBKAccountsControllerTests.m */; };
+		E58D516118529CBF0023D802 /* IFBKRoomControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E58D515F18529C770023D802 /* IFBKRoomControllerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +64,7 @@
 		E51E6BA41832A1D00066869B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E51E6BAB1832A1D00066869B /* ProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ProjectTests-Info.plist"; sourceTree = "<group>"; };
 		E51E6BAD1832A1D00066869B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E51E6BAF1832A1D00066869B /* IFBKAuthControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFBKAuthControllerTests.m; sourceTree = "<group>"; };
+		E51E6BAF1832A1D00066869B /* IFBKAuthControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IFBKAuthControllerTests.m; path = ../ProjectTests/IFBKAuthControllerTests.m; sourceTree = "<group>"; };
 		E51E6BD61832A6730066869B /* IFBKAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFBKAuthController.h; sourceTree = "<group>"; };
 		E51E6BD71832A6730066869B /* IFBKAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFBKAuthController.m; sourceTree = "<group>"; };
 		E51E6BE11832A6730066869B /* IFBKCampground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFBKCampground.h; sourceTree = "<group>"; };
@@ -81,8 +82,10 @@
 		E575059C183D0150008B2168 /* IFBKRoomUsersTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFBKRoomUsersTracker.m; sourceTree = "<group>"; };
 		E575059D183D0150008B2168 /* IFBKStringFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFBKStringFormatter.h; sourceTree = "<group>"; };
 		E575059E183D0150008B2168 /* IFBKStringFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFBKStringFormatter.m; sourceTree = "<group>"; };
-		E57505A5183D1665008B2168 /* IFBKAccountsControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFBKAccountsControllerTests.m; sourceTree = "<group>"; };
+		E57505A5183D1665008B2168 /* IFBKAccountsControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IFBKAccountsControllerTests.m; path = ../ProjectTests/IFBKAccountsControllerTests.m; sourceTree = "<group>"; };
 		E57505A7183D718D008B2168 /* IFBKAccountsController+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IFBKAccountsController+Private.h"; sourceTree = "<group>"; };
+		E58D515F18529C770023D802 /* IFBKRoomControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IFBKRoomControllerTests.m; path = ProjectTests/IFBKRoomControllerTests.m; sourceTree = SOURCE_ROOT; };
+		E58D51621852BB530023D802 /* IFBKRoomControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFBKRoomControllerDelegate.h; sourceTree = "<group>"; };
 		F77F44CC270249598206F6B2 /* Pods-Project.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.xcconfig"; path = "Pods/Pods-Project.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,12 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				E51E6BD21832A6730066869B /* Classes */,
-				E51E6B8B1832A1CF0066869B /* Project */,
-				E51E6BA91832A1D00066869B /* ProjectTests */,
-				E51E6B841832A1CF0066869B /* Frameworks */,
-				E51E6B831832A1CF0066869B /* Products */,
-				F77F44CC270249598206F6B2 /* Pods-Project.xcconfig */,
-				365411988E514DCBB1DAD4F2 /* Pods-ProjectTests.xcconfig */,
+				E58D515C18529ACD0023D802 /* Tests */,
+				E58D515D18529AF90023D802 /* Other */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -183,8 +182,6 @@
 		E51E6BA91832A1D00066869B /* ProjectTests */ = {
 			isa = PBXGroup;
 			children = (
-				E51E6BAF1832A1D00066869B /* IFBKAuthControllerTests.m */,
-				E57505A5183D1665008B2168 /* IFBKAccountsControllerTests.m */,
 				E51E6BAA1832A1D00066869B /* Supporting Files */,
 			);
 			path = ProjectTests;
@@ -206,8 +203,8 @@
 				E575058F183D0142008B2168 /* NSError+IFBKCampground.h */,
 				E5750590183D0142008B2168 /* NSError+IFBKCampground.m */,
 				E51E6BD31832A6730066869B /* Authorization */,
-				E51E6BE21832A6730066869B /* Accounts */,
-				E5750592183D0150008B2168 /* Rooms */,
+				E51E6BE21832A6730066869B /* Account */,
+				E5750592183D0150008B2168 /* Room */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -221,21 +218,23 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
-		E51E6BE21832A6730066869B /* Accounts */ = {
+		E51E6BE21832A6730066869B /* Account */ = {
 			isa = PBXGroup;
 			children = (
 				E575058C183D011F008B2168 /* IFBKAccountsController.h */,
 				E57505A7183D718D008B2168 /* IFBKAccountsController+Private.h */,
 				E575058D183D011F008B2168 /* IFBKAccountsController.m */,
 			);
+			name = Account;
 			path = Accounts;
 			sourceTree = "<group>";
 		};
-		E5750592183D0150008B2168 /* Rooms */ = {
+		E5750592183D0150008B2168 /* Room */ = {
 			isa = PBXGroup;
 			children = (
 				E5750595183D0150008B2168 /* IFBKRoomController.h */,
 				E5750596183D0150008B2168 /* IFBKRoomController.m */,
+				E58D51621852BB530023D802 /* IFBKRoomControllerDelegate.h */,
 				E5750593183D0150008B2168 /* IFBKCFMessage+Campground.h */,
 				E5750594183D0150008B2168 /* IFBKCFMessage+Campground.m */,
 				E5750599183D0150008B2168 /* IFBKRoomMessagesTracker.h */,
@@ -245,7 +244,40 @@
 				E575059D183D0150008B2168 /* IFBKStringFormatter.h */,
 				E575059E183D0150008B2168 /* IFBKStringFormatter.m */,
 			);
+			name = Room;
 			path = Rooms;
+			sourceTree = "<group>";
+		};
+		E58D515C18529ACD0023D802 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E58D515E18529C570023D802 /* Room */,
+				E51E6BAF1832A1D00066869B /* IFBKAuthControllerTests.m */,
+				E57505A5183D1665008B2168 /* IFBKAccountsControllerTests.m */,
+			);
+			name = Tests;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E58D515D18529AF90023D802 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				E51E6B8B1832A1CF0066869B /* Project */,
+				E51E6BA91832A1D00066869B /* ProjectTests */,
+				E51E6B841832A1CF0066869B /* Frameworks */,
+				E51E6B831832A1CF0066869B /* Products */,
+				F77F44CC270249598206F6B2 /* Pods-Project.xcconfig */,
+				365411988E514DCBB1DAD4F2 /* Pods-ProjectTests.xcconfig */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		E58D515E18529C570023D802 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				E58D515F18529C770023D802 /* IFBKRoomControllerTests.m */,
+			);
+			name = Room;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,7 +377,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5C246180DFFD4A6997ADF966 /* Warn for TODO and FIXME comments */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -353,7 +385,7 @@
 			name = "Warn for TODO and FIXME comments";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nFILE_EXTENSIONS=\"h|m|mm|c|cpp\"\nfind -E \"${SRCROOT}\" -ipath \"${SRCROOT}/pods\" -prune -o \\( -regex \".*\\.($FILE_EXTENSIONS)$\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
 		};
@@ -442,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E51E6BB01832A1D00066869B /* IFBKAuthControllerTests.m in Sources */,
+				E58D516118529CBF0023D802 /* IFBKRoomControllerTests.m in Sources */,
 				E57505A6183D1665008B2168 /* IFBKAccountsControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

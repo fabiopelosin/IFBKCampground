@@ -5,7 +5,7 @@
 @interface IFBKRoomController ()
 @property (strong, readwrite) IFBKCFRoom *room;
 @property (copy, readwrite) NSString *authorizationToken;
-@property (copy, readwrite) NSNumber *userID;
+@property (nonatomic, strong, readwrite) IFBKCFUser *user;
 @property (strong, readwrite) NSMutableArray* messages;
 
 @property (assign, readwrite) NSUInteger unreadMessagesCount;
@@ -98,6 +98,37 @@
 }
 
 //------------------------------------------------------------------------------
+#pragma mark - Messages
+//------------------------------------------------------------------------------
+
+- (BOOL)doesMessageIncludeMention:(IFBKCFMessage*)message {
+    NSString *searchKey = [self.user.name componentsSeparatedByString:@" "].firstObject;
+    NSRange range = [message.body rangeOfString:searchKey options:NSCaseInsensitiveSearch];
+    return range.location != NSNotFound;
+}
+
+- (void)_didReceiveNewMessage:(IFBKCFMessage*)message {
+    [self _loadAlternativeViewForMessage:message];
+    [self _handleNewMessages:@[message]];
+    [self.messages addObject:message];
+    [self.userTracker roomDidReceiveMessage:message];
+    [self _sendNotificaitonForMessageIfNeeded:message];
+    [self.delegate roomController:self didReceiveNewMessage:message];
+}
+
+//------------------------------------------------------------------------------
+#pragma mark - Notifications
+//------------------------------------------------------------------------------
+
+- (void)_sendNotificaitonForMessageIfNeeded:(IFBKCFMessage*)message {
+    if ([message.userIdentifier isNotEqualTo:self.user.identifier] && [message isUserGenerated]) {
+        if (!self.notifyOnlyForMentions || [self doesMessageIncludeMention:message]) {
+            [self.delegate roomController:self didReceiveNotificationFormessage:message];
+        }
+    }
+}
+
+//------------------------------------------------------------------------------
 #pragma mark - Unread messages
 //------------------------------------------------------------------------------
 
@@ -170,11 +201,7 @@
     [self.streamClient openConnection:^(NSHTTPURLResponse *httpResponse) {
         NSLog(@"Streaming connection open");
     } messageReceived:^(IFBKCFMessage *message) {
-        [weakSelf _loadAlternativeViewForMessage:message];
-        [weakSelf _handleNewMessages:@[message]];
-        [weakSelf.messages addObject:message];
-        [weakSelf.userTracker roomDidReceiveMessage:message];
-        [weakSelf.delegate roomController:weakSelf didReceiveNewMessage:message];
+        [weakSelf _didReceiveNewMessage:message];
     } failure:^(NSError *error) {
         // TODO: attempt reconnect if the connection was open
         [self _handleError:error];
@@ -195,7 +222,7 @@
 
 - (void)_getCurrentUser {
     [self.apiClient getCurrentUser:^(IFBKCFUser *user) {
-        [self setUserID:user.identifier];
+        self.user = user;
     } failure:^(NSError *error, NSHTTPURLResponse *response) {
         [self _handleError:error];
     }];

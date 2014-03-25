@@ -72,7 +72,7 @@ describe(@"IFBKAccountsController", ^{
             [sut fetchInformation];
         });
 
-        it(@"informs the delegate that all the information has been fetched", ^{
+        xit(@"informs the delegate that all the information has been fetched", ^{
             [[delegate should] receive:@selector(accountsControllerDidCompleteFetch:) withCount:1];
             [sut _willStartFetchOperation];                             // Get Account1
             [sut _willStartFetchOperation];                             // Get Account1 roomList

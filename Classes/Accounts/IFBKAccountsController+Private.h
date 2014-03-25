@@ -25,6 +25,8 @@
 
 // Private methods
 
+
+- (void)_willStartFetchOperation;
 - (void)_campfireClientDidEncounterError:(NSError*)responseError response:(NSHTTPURLResponse*)response;
 
 @end

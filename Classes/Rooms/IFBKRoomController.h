@@ -1,8 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <IFBKThirtySeven/IFBKThirtySeven.h>
+#import "IFBKRoomControllerDelegate.h"
 #import "IFBKRoomUsersTracker.h"
-
-@protocol IFBKRoomControllerDelegate;
 
 /**
  * TODO: This class is a kitchen sink.
@@ -10,6 +9,10 @@
  * TODO: Support polling as streaming requires the authorization token.
  */
 @interface IFBKRoomController : NSObject
+
+///-----------------------------------------------------------------------------
+/// @name Initialization
+///-----------------------------------------------------------------------------
 
 /**
  * The designated initializer.
@@ -19,37 +22,24 @@
 /**
  * The ID of the room that this controller will manager.
  */
-@property (copy, readonly) NSNumber* roomID;
+@property (nonatomic, copy, readonly) NSNumber* roomID;
 
-///-----------------------------------------------------------------------------
-/// Configuration
-///-----------------------------------------------------------------------------
-
-@property id<IFBKRoomControllerDelegate> delegate;
-
-@property IFBKCampfireClient *apiClient;
+/**
+ * Must be set before joining the room.
+ * Allows to perform other actions like changing the topic of the room.
+ */
+@property (nonatomic, strong) IFBKCampfireClient *apiClient;
 
 /**
  * The Authorization toke for the room, found in the My Info section of the
  * campfire web interface. Requred for the streaming support.
  */
-@property (copy, readonly) NSString *authorizationToken;
+@property (nonatomic, copy, readonly) NSString *authorizationToken;
 
-///-----------------------------------------------------------------------------
-/// Properties
-///-----------------------------------------------------------------------------
-
-@property (strong, readonly) IFBKCFRoom *room;
-
-@property (copy, readonly) NSNumber *userID;
-
-@property (strong, readonly) NSMutableArray* messages;
-
-///-----------------------------------------------------------------------------
-/// Trackers
-///-----------------------------------------------------------------------------
-
-@property IFBKRoomUsersTracker *userTracker;
+/**
+ * The delegate that this class will inform.
+ */
+@property id<IFBKRoomControllerDelegate> delegate;
 
 ///-----------------------------------------------------------------------------
 /// Actions
@@ -62,6 +52,51 @@
 - (void)postMessage:(NSString*)body;
 
 - (void)refreh;
+
+//- (void)loadMessagesUpToLastUserPost:(NSUInteger)limit;
+
+///-----------------------------------------------------------------------------
+/// Room
+///-----------------------------------------------------------------------------
+
+/**
+ * The room managed by this controller.
+ */
+@property (nonatomic, strong, readonly) IFBKCFRoom *room;
+
+/**
+ * The user which is logged in the room.
+ */
+@property (nonatomic, strong, readonly) IFBKCFUser *user;
+
+///-----------------------------------------------------------------------------
+/// @name Messages
+///-----------------------------------------------------------------------------
+
+/**
+ * The messages currently loaded.
+ */
+@property (strong, readonly) NSMutableArray* messages;
+
+/**
+ * Wether the given message includes a mention to the current user.
+ */
+- (BOOL)doesMessageIncludeMention:(IFBKCFMessage*)message;
+
+///-----------------------------------------------------------------------------
+/// @name Notifications
+///-----------------------------------------------------------------------------
+
+/**
+ * Wether the delegate should be informed to present a notification only if the message includes a mention to the logged in user.
+ */
+@property BOOL notifyOnlyForMentions;
+
+///-----------------------------------------------------------------------------
+/// Helper Classes
+///-----------------------------------------------------------------------------
+
+@property IFBKRoomUsersTracker *userTracker;
 
 ///-----------------------------------------------------------------------------
 /// Unread messages // TODO: Factor out in IFBKRoomMessagesTracker!
@@ -79,23 +114,7 @@
 
 - (BOOL)isMessageUnread:(NSString*)messageID;
 
-@end
 
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
 
-/**
- */
-@protocol IFBKRoomControllerDelegate <NSObject>
-- (void)roomControllerDidJoinRoom:(IFBKRoomController*)controller;
-- (void)roomController:(IFBKRoomController*)controller didReceiveAlternativeView:(NSView*)view message:(IFBKCFMessage*)message;
-- (void)roomController:(IFBKRoomController*)controller didReceiveNewMessage:(IFBKCFMessage*)message;
-- (void)roomControllerDidUpdateMessagesList:(IFBKRoomController*)controller;
-- (void)roomController:(IFBKRoomController*)controller didConfirmPost:(NSString*)body message:(IFBKCFMessage*)message;
-
-- (void)roomControllerDidUpdateUnreadMessages:(IFBKRoomController*)controller;
-- (void)roomController:(IFBKRoomController*)controller didEncouterError:(NSError*)error;
-- (void)roomController:(IFBKRoomController*)controller didEncouterStreamError:(NSError*)error;
 
 @end
